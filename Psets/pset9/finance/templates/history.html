@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <table class="table tablestriped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for re in result %}
+                <tr>
+                    <td class="text-start">{{ re.symbol }}</td>
+                    <td class="text-end">{{ re.shares_bought }}</td>
+                    <td class="text-end">{{ re.price }}</td>
+                    <td class="text-end">{{ re.date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

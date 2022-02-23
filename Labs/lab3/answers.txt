@@ -1,0 +1,11 @@
+sort1 uses: Bubble sort
+
+How do you know?: In comparison with the selection algorithm, he had worse times in the random and reversed categories, but a better time in the sorted.
+
+sort2 uses: Merge sort
+
+How do you know?: Superfast time in every category.
+
+sort3 uses: Selection sort
+
+How do you know?: In comparison with the bubble algorithm, he had better times in the random and reversed categories, but a worse time in the sorted.

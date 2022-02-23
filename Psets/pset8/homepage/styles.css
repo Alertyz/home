@@ -1,0 +1,228 @@
+body
+{
+  background:url(girl.gif);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-attachment: fixed
+}
+
+.rick
+{
+  background:url(rickroll.gif);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-attachment: fixed
+}
+
+h1
+{
+  font-size:3vw;
+  color:#000;
+  margin-bottom:0;
+  text-shadow:2px 2px 5px white;
+}
+
+main
+{
+  padding:4.5vw;
+}
+
+.list
+{
+  display:inline;
+}
+
+p
+{
+  background-color:#994C41;
+  font-weight:600;
+  font-size:2vw;
+  border-color:#570B17;
+  border-style:solid;
+  border-width:.3vw;
+}
+
+.containers
+{
+  width:100%;
+  padding-right:var(--bs-gutter-x,.75rem);
+  padding-left:var(--bs-gutter-x,.75rem);
+  margin:0!important;
+}
+
+.container
+{
+  width:90%;
+  padding-right:var(--bs-gutter-x,.75rem);
+  padding-left:var(--bs-gutter-x,.75rem);
+}
+
+.container1
+{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding-top:56.25%;
+}
+
+/* https://www.w3schools.com/howto/howto_css_responsive_iframes.asp */
+
+.responsive-iframe
+{
+  position:absolute;
+  top:5vw;
+  left:26vw;
+  width:50%;
+  height:50%;
+  border:none;
+}
+
+a.header
+{
+  font-size:1.7vw;
+  color:#000;
+  text-decoration-line:none;
+  font-weight:600;
+  text-shadow:2px 2px 4px;
+  transition-property:color;
+  transition-duration:.5s;
+  transition-timing-function:ease;
+  transition-delay:0;
+}
+
+button
+{
+  border:0;
+  display:block;
+}
+
+a.one:hover
+{
+  color:#41C42F;
+}
+
+a.two:hover
+{
+  color:#FF623F;
+}
+
+a.three:hover
+{
+  color:#0DD1FF;
+}
+
+a.four:hover
+{
+  color:#FBFFFF;
+}
+
+.fa
+{
+  width:17vw;
+  text-decoration:none;
+  transition-property:color, background-color;
+  transition-duration:1s;
+  transition-timing-function:ease;
+  transition-delay:0;
+  margin:.5vw .1vw;
+  padding:1vw;
+}
+
+/* All fa that is not hover where made from https://www.w3schools.com/howto/howto_css_social_media_buttons.asp*/
+.fa-instagram
+{
+  background:#DD2A7B;
+  color:white;
+}
+
+.fa.one:hover
+{
+  color:#ce125b;
+  background:white;
+}
+
+.fa-twitter
+{
+  background:#55ACEE;
+  color:white;
+}
+
+.fa.two:hover
+{
+  color:#55ACEE;
+  background:white;
+}
+
+.fa-steam
+{
+  background:#171a21;
+  color:white;
+}
+
+.fa.three:hover
+{
+  color:#171a21;
+  background:white;
+}
+
+.fa-discord
+{
+  background:#7289da;
+  color:white;
+}
+
+.fa.four:hover
+{
+  color:#7289da;
+  background:white;
+}
+
+ul.header,ul.social
+{
+  list-style-type:none;
+  font-size:1.7vw;
+  margin-bottom:0;
+}
+
+a.header:after,a.header:before
+{
+  content:"|";
+  color:#000;
+}
+
+@media screen and (max-width: 600px) {
+  h1
+  {
+    font-size:2.59vh;
+  }
+
+  ul.social
+  {
+    font-size:3.4vh;
+  }
+
+  main
+  {
+    padding:9vh;
+  }
+
+  p
+  {
+    font-size:1rem;
+    border-width:5px;
+  }
+
+  a.header
+  {
+    font-size:1.67vh;
+  }
+
+  .fa
+  {
+    width:34vh;
+    margin:1vw .2vh;
+    padding:2vh;
+  }
+}
