@@ -1,0 +1,71 @@
+body
+{
+  background:url(test2.jpg);
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  margin: 8px;
+  overflow: hidden;
+}
+
+form 
+{
+    background-color: white;
+    padding-top: inherit;
+    padding-bottom: inherit;
+}
+
+.containers
+{
+    width: 100%;
+    max-width: 720px;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .color
+{
+    color:#D95C52;
+}
+nav .navbar-brand .color2
+{
+    color:#EBC153;
+}
+
+li
+{
+    list-style-type:none;
+}
+
+div.ex1 
+{
+    height: 15em;
+    overflow-y: auto;
+}
+
+div.scrollmenu 
+{
+    background-color: #fff;
+    overflow: auto;
+    white-space: nowrap;
+}
+  
+div.scrollmenu a 
+{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+}
+
