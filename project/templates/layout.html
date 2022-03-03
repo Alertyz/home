@@ -56,16 +56,17 @@
             {% block main %}{% endblock %}
         </main>
 
-        {% for li in list %}
-            <form action="/" method="post" class="text-center">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <div class="d-flex p-2 bd-highlight container text-center">
+            {% for li in list %}
+                <form action="/" method="post">
+                    <button type="submit" class="btn-success form-check-input"></button>
+                    <button type="submit" class="form-check-input btn-danger">X</button>
                     <label class="form-check-label" for="defaultCheck1">
                     {{ li.todo }}
                     </label>
-                </div>
-            </form>
-        {% endfor %}
+                </form>
+            {% endfor %}
+        </div>
 
     </body>
 </html>
