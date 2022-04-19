@@ -35,11 +35,49 @@ def after_request(response):
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
-    
+
     # TODO: Display the entries in the database on index.html
     list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
 
-    return render_template("index.html", list=list, vari="0")
+    return render_template("index.html", list=list)
+
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    
+    if request.method == "POST":
+        db.execute("INSERT INTO list (user_id, done, todo) VALUES(?, ?, ?)", session["user_id"], 0, request.form.get("todo"))
+        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
+            
+        return render_template("add.html", list=list)
+
+    else:
+        return render_template("add.html")
+
+@app.route("/remove", methods=["GET", "POST"])
+@login_required
+def remove():
+    
+    if request.method == "POST":
+
+        if not request.form.get("done"):
+            print("not done")
+
+        print(request.form.get("done"))
+
+        if not request.form.get("remove"):
+            print("not remove")
+
+        print(request.form.get("remove")) 
+
+        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
+            
+        return render_template("index.html", list=list)
+
+    else:
+        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
+
+        return render_template("index.html", list=list)
 
 
 @app.route("/login", methods=["GET", "POST"])

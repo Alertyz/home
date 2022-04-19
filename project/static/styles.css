@@ -40,6 +40,26 @@ form.back
     margin-left: auto;
 }
 
+.row_cards
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cards
+{
+    padding: .5rem!important;
+}
+
+.test
+{
+    background-color: white;
+    padding: 1rem!important;
+    border-radius: 8px 8px 8px 8px;
+}
+
 /* Size for brand */
 nav .navbar-brand
 {
@@ -56,7 +76,4 @@ nav .navbar-brand .color2
     color:#EBC153;
 }
 
-.d-flex
-{
-    flex-direction: column;
-}
+

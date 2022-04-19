@@ -5,15 +5,28 @@
 {% endblock %}
 
 {% block main %}
-    <div class="d-flex p-2 bd-highlight container text-center">
-        {% for li in list %}
-            <form action="/" method="post">
-                <button type="submit" class="btn-success form-check-input"></button>
-                <button type="submit" class="form-check-input btn-danger">X</button>
-                <label class="form-check-label" for="defaultCheck1">
-                {{ li.todo }}
-                </label>
-            </form>
-        {% endfor %}
+    <div class="container">
+        <div class="row_cards">
+            {% for li in list %}
+            <div class="cards p-2">
+                <div class="test text-justify">
+                    <p>{{ li.todo }}</p>
+                    <form action="/remove" method="post" class="po">
+
+                        <input type="hidden" name="done" value="1"></input>
+                        <button type="submit" class="btn-success form-check-input"></button>
+
+                    </form>
+                    <form action="/remove" method="post" class="po">
+                        
+                        <input type="hidden" name="remove" value="-1"></input>
+                        <button type="submit" class="form-check-input btn-danger"></button>
+
+                    </form>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
     </div>
-{% endblock %}
+{% endblock %}""
