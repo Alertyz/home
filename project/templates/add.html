@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Or Remove
+{% endblock %}
+
+{% block main %}
+    <form action="/Add" method="post" class="back">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto" id="todo" name="todo" placeholder="Todo" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+    </form>  
+
+{% endblock %}

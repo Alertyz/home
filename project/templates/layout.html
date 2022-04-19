@@ -23,13 +23,14 @@
     <body>
         <nav class="bg-light border navbar navbar-expand-md navbar-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span class="color">ToDo <span class="color2">List</span></a>
+                <a class="navbar-brand" href="/"><span class="color">To Do <span class="color2">List</span></a>
                 <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar" data-bs-toggle="collapse" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbar">
                     {% if session["user_id"] %}
                         <ul class="navbar-nav me-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="/Add">Add or Remove</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
                             <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -55,18 +56,6 @@
         <main class="containers py-5 text-center">
             {% block main %}{% endblock %}
         </main>
-
-        <div class="d-flex p-2 bd-highlight container text-center">
-            {% for li in list %}
-                <form action="/" method="post">
-                    <button type="submit" class="btn-success form-check-input"></button>
-                    <button type="submit" class="form-check-input btn-danger">X</button>
-                    <label class="form-check-label" for="defaultCheck1">
-                    {{ li.todo }}
-                    </label>
-                </form>
-            {% endfor %}
-        </div>
 
     </body>
 </html>

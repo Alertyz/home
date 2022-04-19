@@ -5,11 +5,15 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/" method="post" class="back">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto" id="todo" name="todo" placeholder="Todo" type="text">
-        </div>
-        <button class="btn btn-primary" type="submit">Save</button>
-    </form>  
-
+    <div class="d-flex p-2 bd-highlight container text-center">
+        {% for li in list %}
+            <form action="/" method="post">
+                <button type="submit" class="btn-success form-check-input"></button>
+                <button type="submit" class="form-check-input btn-danger">X</button>
+                <label class="form-check-label" for="defaultCheck1">
+                {{ li.todo }}
+                </label>
+            </form>
+        {% endfor %}
+    </div>
 {% endblock %}

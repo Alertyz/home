@@ -35,19 +35,11 @@ def after_request(response):
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
+    
+    # TODO: Display the entries in the database on index.html
+    list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
 
-    if request.method == "POST":
-
-        db.execute("INSERT INTO list (user_id, done, todo) VALUES(?, ?, ?)", session["user_id"], 0, request.form.get("todo"))
-        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
-        return render_template("index.html", list=list, vari="0")
-
-    else:
-
-        # TODO: Display the entries in the database on index.html
-        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
-
-        return render_template("index.html", list=list, vari="0")
+    return render_template("index.html", list=list, vari="0")
 
 
 @app.route("/login", methods=["GET", "POST"])
