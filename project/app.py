@@ -1,5 +1,3 @@
-import os
-
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -41,37 +39,58 @@ def index():
         db.execute("UPDATE list SET done = 1 WHERE user_id = ? AND list_id = ?", session["user_id"], request.form.get("id"))
         db.execute("UPDATE list SET date = CURRENT_TIMESTAMP WHERE user_id = ? AND list_id = ?", session["user_id"], request.form.get("id"))
         
-        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0 ", session["user_id"])
-            
-        return render_template("index.html", list=list)
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        
+        return render_template("index.html", list=list, counter=counter[0]["COUNT(*)"])
 
     else:
 
-        # TODO: Display the entries in the database on index.html
-        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0 ", session["user_id"])
-
-        return render_template("index.html", list=list)
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        
+        return render_template("index.html", list=list, counter=counter[0]["COUNT(*)"])
 
 @app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
     
     if request.method == "POST":
+
         db.execute("INSERT INTO list (user_id, done, todo) VALUES(?, 0, ?)", session["user_id"], request.form.get("todo"))
-            
-        return render_template("add.html")
+
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+
+        return render_template("index.html", list=list, counter=counter[0]["COUNT(*)"])
 
     else:
 
-        return render_template("add.html")
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 0", session["user_id"])
+        
+        return render_template("index.html", list=list, counter=counter[0]["COUNT(*)"])
 
-@app.route("/history")
+@app.route("/history", methods=["GET", "POST"])
 @login_required
 def history():
-    """Show history of transactions"""
 
-    list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 1 ", session["user_id"])
-    return render_template("history.html", list=list)
+    if request.method == "POST":
+
+        db.execute("UPDATE list SET done = 0 WHERE user_id = ? AND list_id = ?", session["user_id"], request.form.get("id"))
+
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 1 ", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 1", session["user_id"])
+
+        return render_template("history.html", list=list, counter=counter)
+
+    else:
+
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 1 ", session["user_id"])
+        counter = db.execute("SELECT COUNT(*) FROM list WHERE user_id = ? AND done = 1", session["user_id"])
+        
+
+        return render_template("history.html", list=list, counter=counter[0]["COUNT(*)"])
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -85,18 +104,18 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 400)
+            return apology("must provide username", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 400)
+            return apology("must provide password", 403)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 400)
+            return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["user_id"]
@@ -118,19 +137,19 @@ def register():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 400)
+            return apology("must provide username", 403)
 
         # Check if username is available
         if db.execute("SELECT username FROM users WHERE username = ?", request.form.get("username")) != db.execute("SELECT user_id FROM users WHERE user_id = 0"):
-            return apology("username is not available", 400)
+            return apology("username is not available", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 400)
+            return apology("must provide password", 403)
 
         # Check if passowords match
         elif request.form.get("password") != request.form.get("confirmation"):
-            return apology("passwords do not match", 400)
+            return apology("passwords do not match", 403)
 
         # hash password
         has = generate_password_hash(request.form.get("password"))
