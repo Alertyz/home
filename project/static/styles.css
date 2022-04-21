@@ -8,6 +8,11 @@ body
   margin: 8px;
 }
 
+.border {
+    border: 1px solid #dee2e6!important;
+    border-radius: 8px 8px 8px 8px;
+}
+
 form.back
 {
     background-color: white;
@@ -20,14 +25,24 @@ form.back
     width: 150px;
 }
 
-.btn-success
+.form-check-input 
 {
-    border-radius: 0.25em;
+    width: 2em;
+    height: 2em;
 }
 
-.btn-danger
-{
-    border-radius: 0.25em;
+.btn-outline-primary  {
+    color: #fff;
+    border-radius: 2em;
+    background-color: white;
+    border-color: #3e69e4;
+}
+
+.btn-outline-primary2  {
+    color: #fff;
+    border-radius: 2em;
+    background-color: #3e69e4;
+    border-color: #3e69e4;
 }
 
 .containers
@@ -43,17 +58,23 @@ form.back
 .row_cards
 {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: center;
 }
 
-.cards
-{
+.cards {
+    display: flex;
+    flex-direction: row-reverse;
+    align-content: center;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: flex-end;
     padding: .5rem!important;
 }
 
-.test
+.shape
 {
     background-color: white;
     padding: 1rem!important;

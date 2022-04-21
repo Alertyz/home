@@ -36,49 +36,42 @@ def after_request(response):
 @login_required
 def index():
 
-    # TODO: Display the entries in the database on index.html
-    list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
+    if request.method == "POST":
 
-    return render_template("index.html", list=list)
+        db.execute("UPDATE list SET done = 1 WHERE user_id = ? AND list_id = ?", session["user_id"], request.form.get("id"))
+        db.execute("UPDATE list SET date = CURRENT_TIMESTAMP WHERE user_id = ? AND list_id = ?", session["user_id"], request.form.get("id"))
+        
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0 ", session["user_id"])
+            
+        return render_template("index.html", list=list)
+
+    else:
+
+        # TODO: Display the entries in the database on index.html
+        list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 0 ", session["user_id"])
+
+        return render_template("index.html", list=list)
 
 @app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
     
     if request.method == "POST":
-        db.execute("INSERT INTO list (user_id, done, todo) VALUES(?, ?, ?)", session["user_id"], 0, request.form.get("todo"))
-        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
+        db.execute("INSERT INTO list (user_id, done, todo) VALUES(?, 0, ?)", session["user_id"], request.form.get("todo"))
             
-        return render_template("add.html", list=list)
-
-    else:
         return render_template("add.html")
 
-@app.route("/remove", methods=["GET", "POST"])
-@login_required
-def remove():
-    
-    if request.method == "POST":
-
-        if not request.form.get("done"):
-            print("not done")
-
-        print(request.form.get("done"))
-
-        if not request.form.get("remove"):
-            print("not remove")
-
-        print(request.form.get("remove")) 
-
-        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
-            
-        return render_template("index.html", list=list)
-
     else:
-        list = db.execute("SELECT * FROM list WHERE user_id = ?", session["user_id"])
 
-        return render_template("index.html", list=list)
+        return render_template("add.html")
 
+@app.route("/history")
+@login_required
+def history():
+    """Show history of transactions"""
+
+    list = db.execute("SELECT * FROM list WHERE user_id = ? AND done = 1 ", session["user_id"])
+    return render_template("history.html", list=list)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -92,11 +85,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("must provide username", 400)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return apology("must provide password", 400)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = ?", request.form.get("username"))
