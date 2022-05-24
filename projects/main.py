@@ -1,2 +1,0 @@
-TOKEN = 'OTc4Mzk5OTM5OTA0Mjc4NTY4.GlXCVZ.EVnmlgMpQiPjyuz9Zn9swnxwK6xDdP1uj76DvU'
-
