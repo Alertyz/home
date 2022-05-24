@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    List
+{% endblock %}
+
+{% block main %}
+    {% if list == [] %}
+        <p>Tasks will appear here</p>
+    {% else %}
+        <div class="container shape border">
+            <div class="row_cards">
+                {% for li in list %}
+                <div class="cards p-2">
+                    <div class="shape">
+                        <p>{{ li.todo }}</p>
+                    </div>
+                    <form action="/" method="post">
+                        <input type="hidden" name="id" value="{{ li.list_id }}">
+                        <button type="submit" class="btn btn-outline-primary form-check-input"></button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
